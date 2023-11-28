@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: Short Notes Service API
+  version: 1.0.0
+  description: API for managing short notes with category.
+
+components:
+  schemas:
+    Note:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int
+          readOnly: true
+          title: Id
+        title:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Title
+        content:
+          type: string
+          maxLength: 404
+          minLength: 1
+          title: Content
+        category:
+          type: string
+          maxLength: 100
+          title: Category
+          x-nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          title: CreatedAt
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          title: UpdatedAt
+
+paths:
+  /notes:
+    get:
+      summary: Get all notes
+      description: Retrieve all short notes for the authenticated user.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                notes:
+                  - $ref: '#/components/schemas/Note'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                error: "Forbidden"
+
+    post:
+      summary: Create a new note
+      description: Create a new short note for the authenticated user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              $ref: '#/components/schemas/Note'
+
+      responses:
+        '201':
+          description: Note created successfully
+          content:
+            application/json:
+              example:
+                $ref: '#/components/schemas/Note'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: "Bad Request"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"
+
+  /notes/{noteId}:
+    get:
+      summary: Get a specific note
+      description: Retrieve a specific short note by ID for the authenticated user.
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          description: ID of the note
+          schema:
+            type: string
+            format: int
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                $ref: '#/components/schemas/Note'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                error: "Not Found"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"
+
+    patch:
+      summary: Update a specific note
+      description: Update the content or tags of a specific short note by ID for the authenticated user.
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          description: ID of the note
+          schema:
+            type: string
+            format: int
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              $ref: '#/components/schemas/Note'
+
+      responses:
+        '200':
+          description: Note updated successfully
+          content:
+            application/json:
+              example:
+                $ref: '#/components/schemas/Note'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                error: "Not Found"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"
+
+    delete:
+      summary: Delete a specific note
+      description: Delete a specific short note by ID for the authenticated user.
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          description: ID of the note
+          schema:
+            type: string
+            format: int
+
+      responses:
+        '204':
+          description: Note deleted successfully
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                error: "Not Found"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"
