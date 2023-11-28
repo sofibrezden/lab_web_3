@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout User</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .big-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 93vh;
+            background-color: #F5E9E4;
+        }
+
+        .my-container {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            height: 80%;
+            border: 1px solid #8D7A7A;
+            border-radius: 10px;
+            background-color: #FBEFE2;
+        }
+
+        .my-container-i {
+            width: 70%;
+            margin: 2%;
+            color: #8D7A7A;
+            padding: 5%;
+        }
+
+        @media screen and (max-width: 728px) {
+            .my-container {
+                flex-direction: column-reverse;
+            }
+
+            .my-container-i {
+                width: 100%;
+                text-align: center;
+            }
+
+            .big-container {
+                height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="big-container">
+        <div class="my-container">
+            <div class="my-container-i">
+                <h1>Logged Out</h1>
+                <p>You have been successfully logged out of your account.</p>
+                <p>
+                    <a href="/login" style="background-color: #FF8A80; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                        <i class="fa fa-user"></i> Log in again
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
