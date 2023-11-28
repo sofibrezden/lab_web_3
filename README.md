@@ -54,26 +54,43 @@ To run the Short Note Hub locally, follow these steps:
 
 ## 🔨Usage Example
 
-### Hello World API
-
-To interact with the Hello World API, you can make HTTP GET requests to the following endpoint:
-
-```http
-GET /api/v1/hello-world-<variant_number>/
-```
-Replace <variant_number> with the desired variant number. This API endpoint will respond with a JSON message containing the greeting.
+### Notes API
 
 Example of using:
 
-    http://127.0.0.1:8000/api/v1/hello-world-4/
+    http://127.0.0.1:8000
 
 
 <div align="center">
-  <img src="img_1.png" alt="Description of the image">
+  <img src="images/img.png" alt="Start page">
 </div>
 
+Example of using:
 
-Replace 4 with the desired variant number.
+    http://127.0.0.1:8000/notes/
+
+
+<div align="center">
+  <img src="images/img_2.png" alt="Start page">
+</div>
+
+Example of using:
+
+    http://127.0.0.1:8000/notes/?id=5
+
+
+<div align="center">
+  <img src="images/img_3.png" alt="Start page">
+</div>
+
+Example of using:
+
+    http://127.0.0.1:8000/delete-notes/5/
+
+
+<div align="center">
+  <img src="images/img_4.png" alt="Start page">
+</div>
 
 This example assumes that your Django development server is running locally on http://127.0.0.1:8000/. 
 Make sure to adjust the URLs accordingly if your setup is different.
