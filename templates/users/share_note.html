@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Share Notes
+{% endblock title %}
+
+{% block body %}
+    <h2>Share Note</h2>
+
+    {% if note %}
+        <p>Note Title: {{ note.title }}</p>
+        <p>Note Content: {{ note.content }}</p>
+    {% else %}
+        <p>Note not found</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'share_note_access' note.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Share</button>
+    </form>
+{% endblock body %}

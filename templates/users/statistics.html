@@ -1,0 +1,28 @@
+<!-- templates/users/statistics.html -->
+{% extends 'base.html' %}
+
+{% block title %}
+    User Statistics
+{% endblock title %}
+
+{% block body %}
+    <h2>User Statistics</h2>
+
+    <h3>Your Notes:</h3>
+    <ul>
+        {% for note in user_notes %}
+            <li>{{ note.title }} ({{ note.updated_at }})</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Your Shared Accesses:</h3>
+    <ul>
+        {% for shared_access in user_shared_accesses %}
+            <li>
+                Note: {{ shared_access.note.title }}<br>
+                Last Edit Time: {{ shared_access.last_edit}}<br>
+            </li>
+        {% endfor %}
+    </ul>
+<a href="{% url 'notes' %}">Back to My Notes</a>
+{% endblock body %}

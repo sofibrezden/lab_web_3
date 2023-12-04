@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Note Details
+{% endblock title %}
+
+
+{% block body %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+<section class="section">
+    <div class="columns">
+        <div class="column is-2">
+            <aside class="menu">
+                <p class="menu-label">My Notes</p>
+                <ul class="menu-list">
+                    {% for doc in documents %}
+                        <li><a href="{% url 'notes' %}?id={{doc.id}}">{{doc.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </aside>
+        </div>
+        <div class="column is-10">
+            <div class="container">
+                <h2 class="title is-2">Note Details</h2>
+                <p>Title: {{ note.title }}</p>
+                <p>Content: {{ note.content }}</p>
+                <p>Category: {{ note.category }}</p>
+                <p>Time created: {{ note.created_at }}</p>
+                <p>Time updated: {{ note.updated_at }}</p>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <a href="{% url 'edit_note' note.id %}" class="button is-primary">Edit Note</a>
+                    </div>
+                    <div class="control">
+                        <a href="{% url 'delete_note' note.id %}" class="button is-danger">Delete Note</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}
