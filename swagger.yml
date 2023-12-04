@@ -3,6 +3,8 @@ info:
   title: Short Notes Service API
   version: 1.0.0
   description: API for managing short notes with category.
+servers:
+  - url: http://localhost:8000
 
 components:
   schemas:
@@ -39,6 +41,43 @@ components:
           format: date-time
           readOnly: true
           title: UpdatedAt
+
+    ShareAccessForm:
+      type: object
+      properties:
+        username:
+          type: string
+          description: "Username of the user to share the note with"
+
+    UserStatistics:
+      type: object
+      properties:
+        user_notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        user_shared_accesses:
+          type: array
+          items:
+            type: object
+            properties:
+              note:
+                $ref: '#/components/schemas/Note'
+              last_edit:
+                type: string
+                format: date-time
+
+    SharedNote:
+      type: object
+      properties:
+        title:
+          type: string
+        id:
+          type: string
+          format: int
+        updated_at:
+          type: string
+          format: date-time
 
 paths:
   /notes:
@@ -96,7 +135,7 @@ paths:
               example:
                 error: "Unauthorized"
 
-  /notes/{noteId}:
+  /view_note/{noteId}:
     get:
       summary: Get a specific note
       description: Retrieve a specific short note by ID for the authenticated user.
@@ -129,6 +168,7 @@ paths:
               example:
                 error: "Unauthorized"
 
+  /edit_note/{noteId}:
     patch:
       summary: Update a specific note
       description: Update the content or tags of a specific short note by ID for the authenticated user.
@@ -167,7 +207,7 @@ paths:
             application/json:
               example:
                 error: "Unauthorized"
-
+  /delete_note/{noteId}:
     delete:
       summary: Delete a specific note
       description: Delete a specific short note by ID for the authenticated user.
@@ -195,3 +235,50 @@ paths:
             application/json:
               example:
                 error: "Unauthorized"
+  /notes/{note_id}/share:
+    post:
+      summary: "Share note access"
+      description: "Share access to a note with another user"
+      parameters:
+        - name: note_id
+          in: path
+          description: "ID of the note to share"
+          required: true
+          schema:
+            type: integer
+        - name: body
+          in: query
+          description: "ShareAccessForm data"
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: "Username of the user to share the note with"
+      responses:
+        200:
+          description: "Note access shared successfully"
+        400:
+          description: "Bad Request - Maximum shared accesses reached or user already has access to the note"
+        404:
+          description: "Not Found - User with the given username doesn't exist"
+  /shared_notes/:
+    get:
+      summary: "Get shared notes"
+      description: "Retrieve notes shared with the authenticated user"
+      responses:
+        200:
+          description: "List of shared notes"
+        401:
+          description: "Unauthorized - User not logged in"
+
+  /statistics/:
+    get:
+      summary: "View user statistics"
+      description: "Retrieve statistics for the authenticated user"
+      responses:
+        200:
+          description: "User statistics retrieved successfully"
+        401:
+          description: "Unauthorized - User not logged in"
