@@ -21,6 +21,8 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from users.views import create_note, edit_note, view_note, delete_note, share_note_access, shared_notes, view_statistics
+
 admin.site.site_header = "Admin"
 admin.site.site_title = "Admin Portal"
 admin.site.index_title = "Admin's Site"
@@ -30,10 +32,15 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('notes/', user_views.notes, name='notes'),
-    path('delete-notes/<int:id>/', user_views.delete_note, name='delete-note'),
-    path('',include('main.urls'))
-] 
+    path('create_note/', create_note, name='create_note'),
+    path('edit_note/<int:id>/', edit_note, name='edit_note'),
+    path('view_note/<int:id>/', view_note, name='view_note'),
+    path('notes/<int:note_id>/share/', share_note_access, name='share_note_access'),
+    path('delete_note/<int:id>/', delete_note, name='delete_note'),
+    path('shared_notes/', shared_notes, name='shared_notes'),
+    path('statistics/', view_statistics, name='statistics'),
+    path('', include('main.urls'))
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
