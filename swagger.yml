@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Short Notes Service API
   version: 1.0.0
-  description: API for managing short notes with category.
-servers:
-  - url: http://localhost:8000
+  description: API for managing short notes with tags.
+tags:
+  - name: Notes
+    description: "Get notes details"
+  - name: Share Access
+    description: "Get shared access details"
+  - name: User Statistics
+    description: "Get users statistics"
 
 components:
   schemas:
@@ -26,29 +31,16 @@ components:
           maxLength: 404
           minLength: 1
           title: Content
-        category:
-          type: string
-          maxLength: 100
-          title: Category
-          x-nullable: true
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          title: CreatedAt
+        categories:
+          type: array
+          items:
+            type: string
+          title: Categories
         updatedAt:
           type: string
           format: date-time
           readOnly: true
           title: UpdatedAt
-
-    ShareAccessForm:
-      type: object
-      properties:
-        username:
-          type: string
-          description: "Username of the user to share the note with"
-
     UserStatistics:
       type: object
       properties:
@@ -90,8 +82,12 @@ paths:
           content:
             application/json:
               example:
-                notes:
-                  - $ref: '#/components/schemas/Note'
+                id: "1"
+                title: "Example Note"
+                content: "This is an example note."
+                categories: "test"
+                createdAt: "2023-01-01T12:00:00Z"
+                updatedAt: "2023-01-01T12:30:00Z"
         '401':
           description: Unauthorized
           content:
@@ -104,6 +100,8 @@ paths:
             application/json:
               example:
                 error: "Forbidden"
+      tags:
+        - Notes
 
     post:
       summary: Create a new note
@@ -113,15 +111,24 @@ paths:
         content:
           application/json:
             example:
-              $ref: '#/components/schemas/Note'
-
+                id: "1"
+                title: "New Note"
+                content: "This is an new note."
+                categories: "test"
+                createdAt: "2023-01-01T12:00:00Z"
+                updatedAt: "2023-01-01T12:30:00Z"
       responses:
         '201':
           description: Note created successfully
           content:
             application/json:
               example:
-                $ref: '#/components/schemas/Note'
+                id: "1"
+                title: "New Note"
+                content: "This is an new note."
+                categories: "test"
+                createdAt: "2023-01-01T12:00:00Z"
+                updatedAt: "2023-01-01T12:30:00Z"
         '400':
           description: Bad Request
           content:
@@ -134,6 +141,8 @@ paths:
             application/json:
               example:
                 error: "Unauthorized"
+      tags:
+        - Notes
 
   /view_note/{noteId}:
     get:
@@ -147,6 +156,8 @@ paths:
           schema:
             type: string
             format: int
+      tags:
+        - Notes
 
       responses:
         '200':
@@ -154,7 +165,12 @@ paths:
           content:
             application/json:
               example:
-                $ref: '#/components/schemas/Note'
+                id: "2"
+                title: "New Note"
+                content: "This is an new note."
+                categories: "test"
+                createdAt: "2023-01-01T12:00:00Z"
+                updatedAt: "2023-01-01T12:30:00Z"
         '404':
           description: Not Found
           content:
@@ -169,7 +185,7 @@ paths:
                 error: "Unauthorized"
 
   /edit_note/{noteId}:
-    patch:
+    put:
       summary: Update a specific note
       description: Update the content or tags of a specific short note by ID for the authenticated user.
       parameters:
@@ -186,7 +202,13 @@ paths:
         content:
           application/json:
             example:
-              $ref: '#/components/schemas/Note'
+                id: "1"
+                title: "New Note"
+                content: "This is an new note."
+                categories: "test"
+                createdAt: "2023-01-01T12:00:00Z"
+                updatedAt: "2023-01-01T12:30:00Z"
+
 
       responses:
         '200':
@@ -194,7 +216,12 @@ paths:
           content:
             application/json:
               example:
-                $ref: '#/components/schemas/Note'
+                id: "1"
+                title: "New Note"
+                content: "This is an new note."
+                categories: "test"
+                createdAt: "2023-01-01T12:00:00Z"
+                updatedAt: "2023-01-01T12:30:00Z"
         '404':
           description: Not Found
           content:
@@ -207,6 +234,8 @@ paths:
             application/json:
               example:
                 error: "Unauthorized"
+      tags:
+        - Notes
   /delete_note/{noteId}:
     delete:
       summary: Delete a specific note
@@ -235,6 +264,10 @@ paths:
             application/json:
               example:
                 error: "Unauthorized"
+
+      tags:
+        - Notes
+
   /notes/{note_id}/share:
     post:
       summary: "Share note access"
@@ -263,6 +296,9 @@ paths:
           description: "Bad Request - Maximum shared accesses reached or user already has access to the note"
         404:
           description: "Not Found - User with the given username doesn't exist"
+      tags:
+        - Share Access
+
   /shared_notes/:
     get:
       summary: "Get shared notes"
@@ -270,8 +306,22 @@ paths:
       responses:
         200:
           description: "List of shared notes"
+          content:
+            application/json:
+              example:
+                - title: "Shared Note 1"
+                  id: "1"
+                  updated_at: "2023-01-01T12:00:00Z"
+                - title: "Shared Note 2"
+                  id: "2"
+                  updated_at: "2023-01-01T12:30:00Z"
+                - title: "Shared Note 3"
+                  id: "3"
+                  updated_at: "2023-01-01T13:00:00Z"
         401:
           description: "Unauthorized - User not logged in"
+      tags:
+        - Share Access
 
   /statistics/:
     get:
@@ -280,5 +330,30 @@ paths:
       responses:
         200:
           description: "User statistics retrieved successfully"
+          content:
+            application/json:
+              example:
+                    user_notes:
+                      - id: "1"
+                        title: "Example Note"
+                        content: "This is an example note."
+                        categories: "example"
+                        updatedAt: "2023-01-01T12:30:00Z"
+                    user_shared_accesses:
+                      - note:
+                          id: "2"
+                          title: "Another Note"
+                          content: "This is another note."
+                          categories: "another"
+                          updatedAt: "2023-01-01T12:40:00Z"
+                        last_edit: "2023-01-01T13:00:00Z"
+                      - note:
+                          id: "3"
+                          title: "Third Note"
+                          content: "This is a third note."
+                          categories: "third"
+                          updatedAt: "2023-01-01T12:50:00Z"
         401:
           description: "Unauthorized - User not logged in"
+      tags:
+        - User Statistics
