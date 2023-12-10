@@ -1,22 +1,228 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Short Note Hub
+A Note Keeping
 {% endblock title %}
 
 {% block body %}
 <style>
-  .heading {
-    text-align: center;
-    padding: 150px 0;
-    background-color: rgb(180, 192, 240);
-  }
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+
+        .carousel-caption {
+            display: flex;
+            justify-content: center;
+            flex-direction: column-reverse;
+        }
+
+        .heading {
+            padding-top: 0 !important;
+        }
+    }
+
+    .col-lg-4 {
+        text-align: center;
+    }
+
+    .carousel-caption {
+        color: white;
+        position: static;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .carousel-indicators li {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .heading {
+        width: 100%;
+        padding-top: 150px;
+    }
 </style>
 
-<div class="container my-4">
-  <div class="heading">
-    <h3>Short Note Hub</h3>
-  </div>
-</div>
+<!--First Block-->
+<div class="container my-4 px-0">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-caption">
+                    <div class="heading" style="background-color:rgb(180, 192, 240)">
+                        <h3>Short Note Hub welcomes you</h3>
 
+                    </div>
+                    <img src="https://img.freepik.com/premium-photo/using-professional-digital-tablet-technology-write-business-work-modern-online-screen-cyberspace-communication-hand-writing-via-white-pen-lifestyle-same-laptop-computer-notebook-using_33755-9636.jpg"
+                         alt="">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-caption">
+                    <div class="heading" style="background-color:rgb(0, 169, 137)">
+                        <h3>When everything gets Digital</h3>
+                        <p style="font-size:20px">then why not your Notes</p>
+                    </div>
+                    <img src="https://img.freepik.com/free-vector/notes-concept-illustration_114360-689.jpg"
+                         alt="">
+                </div>
+            </div>
+        </div>
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
+        </ol>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+            <span class="visually-hidden">Next</span>
+        </a>
+    </div>
+
+    <!--Second Block Starts-->
+    <div class="row my-5">
+        <div class="col-lg-4">
+            <img src="https://thumbs.dreamstime.com/b/tired-employee-unable-to-cope-deadline-worried-caucasian-hipster-beard-sitting-workplace-clutching-head-missed-78531815.jpg"
+                 alt=""
+                 class="bd-placeholder-img rounded-circle" width="140"
+                 height="140" aria-label="Placeholder: 140x140" focusable="false">
+            <h2>
+                Meet all deadlines</h2>
+        </div>
+        <div class="col-lg-4">
+            <img src="https://png.pngtree.com/png-vector/20190612/ourlarge/pngtree-analyticsboardpresentationlaptopstatistics-flat-color-ic-png-image_1351465.jpg"
+                 alt="" class="bd-placeholder-img rounded-circle" width="140"
+                 height="140" aria-label="Placeholder: 140x140" focusable="false">
+            <h2>Statistics</h2>
+        </div>
+        <div class="col-lg-4">
+            <img src="https://static.vecteezy.com/system/resources/previews/000/656/819/original/computer-design-teamwork-vector.jpg"
+                 alt="" class="bd-placeholder-img rounded-circle" width="140"
+                 height="140" aria-label="Placeholder: 140x140" focusable="false">
+            <h3>Collaborative Notes</h3>
+        </div>
+    </div>
+
+    <!-- START THE FEATURETTES -->
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <main>
+                <section>
+                    <h2>Main Features</h2>
+                    <p>Short Note Hub offers a simple and efficient way to manage your short notes. Explore its key
+                        features
+                        below:</p>
+                    <ul>
+                        <li>
+                            <h3>Easy Access to Short Notes</h3>
+                            <p>Quickly access and review your short notes whenever you need them.</p>
+                        </li>
+                        <li>
+                            <h3>Simple Note Management</h3>
+                            <p>Effortlessly add and remove notes through an intuitive interface.</p>
+                        </li>
+                        <li>
+                            <h3>Quick View and Edit</h3>
+                            <p>Instantly view and edit existing notes for fast updates.</p>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="https://cdn.gencraft.com/prod/user/a07bca46-5928-4a06-b5b3-3c1d12237664/e4402202-696b-4bef-9c03-0d44535ad093/image/image1_0.jpg?Expires=1702307821&Signature=Q4m9hHZSlmPECTp89REgXTkOYzuNslfyzas67a40ZidnZ3UxLWV2QA1aQHtkqJX7iNoNEFDY7HQ-kBvg1dYo-MkWtS9AvT7QaEfErdyC9hMLhzFrFmugqu9Q3~Nv49PHA9A0DJwEwCftrqa1sNI9TDR6WWaeVJATAbUKlFzvv6QR4lWxdW3oNH7RvGiHRl9HMBax92toVrchM3ZuYE4fB6HfIK2pSOz0E4JSQrnZ2Tw20M4RzObFm0-vJvrED5kujTXl4UYPiABesr~d7M1fMvcD247wEIA3gStMXSkuUXCNhkXNvSZHSMmAawnRuQhoB9YBCgqMRR3omjY0URZCKg__&Key-Pair-Id=K3RDDB1TZ8BHT8"
+                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                 height="500" aria-label="Placeholder: 500x500" focusable="false">
+        </div>
+
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Additional Highlights</h2>
+            <ul>
+                <li>
+                    <h3>Organize with Short Lists</h3>
+                    <p>Efficiently organize your notes using short lists for better categorization.</p>
+                </li>
+                <li>
+                    <h3>Minimalistic and User-Friendly Design</h3>
+                    <p>Experience a clean and understandable design that puts simplicity at the forefront.</p>
+                </li>
+                <li>
+                    <h3>Access from Any Device</h3>
+                    <p>Enjoy the flexibility of accessing Short Note Hub from any device for on-the-go
+                        productivity.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="https://cdn.gencraft.com/prod/user/a07bca46-5928-4a06-b5b3-3c1d12237664/f3d26f17-d7b7-4185-9dd0-2c8490ab09e4/image/image1_0.jpg?Expires=1702307698&Signature=F3Si7BIRZjZBhA8odDf00gRf88EEf~ojrzAWmiBJZkiNZdvwxkSu6F~A3kbQ8YGSjUeuBjskNpmwU7Ow5S-mnT-YApd2DxnVmMmDvnJ5vQYBwoTRG519xmHDf0ThPpTxuTSRc5Q6NnAN~WGtr7gIbjEGbt92vOMw8FoRi8YCyVmVZl7fHTMT3DpLuKGa-XIFwFcts~gJ-i0mA7duSpXxISoyXz~LDeVzyOC9cm4cAkfSVO1Ey-2XY2DJOpD3pmt~j0JnHo4j7GNYv633AQ-EMmRqQil8WVyRmUXRieCbgvWipNcNHffkkhHH9FvpQyLwaRHUE7KoQujFQzIdUDHwvw__&Key-Pair-Id=K3RDDB1TZ8BHT8"
+                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                 height="500" aria-label="Placeholder: 500x500" focusable="false">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <main>
+                <section>
+                    <h2>Who Is It For?</h2>
+                    <p>Short Note Hub is designed for individuals seeking a straightforward tool to save their short
+                        notes without unnecessary complexities.</p>
+                    <p>Whether you're a student jotting down quick reminders, a professional keeping track of ideas,
+                        or anyone who values simplicity in note-taking, Short Note Hub provides an easy and efficient
+                        solution.</p>
+                </section>
+            </main>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src=" https://events.yorku.ca/wp-content/uploads/2023/11/pexels-fauxels-3183150_James-Robertson-scaled.jpg"
+
+                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                 height="500" aria-label="Placeholder: 500x500" focusable="false">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2>Key Demographics</h2>
+            <p>Our target audience includes:</p>
+            <ul>
+                <li>Students managing class assignments and study notes.</li>
+                <li>Professionals organizing thoughts, ideas, and to-do lists.</li>
+                <li>Individuals who appreciate a minimalistic approach to productivity.</li>
+                <li>Anyone in need of a hassle-free tool for short-term notekeeping.</li>
+            </ul>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="https://img.freepik.com/premium-photo/business-concept-smart-checklist-virtual-screen-modern-office-man-uses-pen-make-notes-about-exploring-topics-digital-form-check-document-sheet-laptop-work_27634-1584.jpg?w=360"
+                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                 height="200" aria-label="Placeholder: 500x500" focusable="false">
+        </div>
+    </div>
+
+</div>
+</div>
 {% endblock body %}

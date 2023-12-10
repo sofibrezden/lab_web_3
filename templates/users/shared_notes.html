@@ -1,25 +1,30 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Note Details
+    Note Details
 {% endblock title %}
-
 
 {% block body %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
 <section class="section">
-  <h2 class="title is-2">Shared Notes</h2>
-  {% if shared_notes %}
-    <ul>
-      {% for note in shared_notes %}
-        <li><a href="{% url 'view_note' note.id %}">{{ note.title }}</a></li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No shared notes available.</p>
-  {% endif %}
-  <br>
-  <a href="{% url 'notes' %}">Back to My Notes</a>
+    <div class="container">
+        <h2 class="title is-3">Shared Notes</h2>
+
+        <div class="content">
+            {% if shared_notes %}
+                <ul>
+                    {% for note in shared_notes %}
+                        <li><a href="{% url 'view_note' note.id %}">{{ note.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No shared notes available.</p>
+            {% endif %}
+
+            <br>
+            <a class="button is-info" href="{% url 'notes' %}">Back to My Notes</a>
+        </div>
+    </div>
+</section>
 {% endblock %}
-</section>>
