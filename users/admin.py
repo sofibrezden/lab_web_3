@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Note
-# Register your models here.
+from .models import SharedAccess, Note
 
-admin.site.register(Note)
+class SharedAccessInline(admin.TabularInline):
+    model = SharedAccess
+    extra = 1
+
+class NoteAdmin(admin.ModelAdmin):
+    inlines = [SharedAccessInline]
+
+admin.site.register(Note, NoteAdmin)
