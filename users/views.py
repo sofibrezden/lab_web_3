@@ -17,7 +17,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Your Account has been created, You can Login Now!')
-            return redirect('/login')
+            return redirect('/login/')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
@@ -80,8 +80,8 @@ def edit_note(request, id):
             content = note.content
             if len(content) >= 404:
                 return HttpResponseBadRequest("Content is too long. Maximum length is 404 characters.")
-                form.save()
-            messages.success(request, f'Note Updated Successfully')
+            form.save()
+            messages.success(request, 'Note Updated Successfully')
             return redirect('/notes/')
     else:
         form = NoteForm(instance=note)
