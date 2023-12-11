@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Short Notes Service API
   version: 1.0.0
-  description: API for managing short notes with tags.
+  description: API for managing short notes.
 tags:
   - name: Notes
     description: "Get notes details"
@@ -47,26 +47,32 @@ components:
         user_notes:
           type: array
           items:
-            $ref: '#/components/schemas/Note'
+            type: object
+            properties:
+              title:
+                type: string
+              updatedAt:
+                  type: string
+                  format: date-time
+                  readOnly: true
+                  title: UpdatedAt
+            required:
+              - title
         user_shared_accesses:
           type: array
           items:
             type: object
             properties:
-              note:
-                $ref: '#/components/schemas/Note'
+              title:
+                  type: string
               last_edit:
                 type: string
                 format: date-time
-
     SharedNote:
       type: object
       properties:
         title:
           type: string
-        id:
-          type: string
-          format: int
         updated_at:
           type: string
           format: date-time
