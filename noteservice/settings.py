@@ -80,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shortnoteshub',
-        'USER': 'root',
-        'PASSWORD': 'brezden1905',
+        'USER': '****',
+        'PASSWORD': '***********',
         'HOST': 'localhost',  # Set to the host where your MySQL server is running
-        'PORT': '3306',       # Set to the port your MySQL server is using
+        'PORT': '****',       # Set to the port your MySQL server is using
     }
 }
 
