@@ -65,32 +65,28 @@ Example of using:
   <img src="images/img.png" alt="Start page">
 </div>
 
-Example of using:
+**User Authentication**
+- `/register/`: User registration view.
+- `/login/`: User login view.
+- `/logout/`: User logout view.
 
-    http://127.0.0.1:8000/notes/
+**Note Management**
+- `/notes/`: View to display user-specific notes.
+- `/create_note/`: View for creating a new note.
+- `/edit_note/<int:id>/`: View for editing an existing note.
+- `/view_note/<int:id>/`: View for viewing details of a specific note.
+- `/notes/<int:note_id>/share/`: View for sharing access to a specific note.
+- `/delete_note/<int:id>/`: View for deleting a specific note.
 
+**Shared Notes**
+- `/shared_notes/`: View to display notes shared with the user.
 
-<div align="center">
-  <img src="images/img_2.png" alt="Start page">
-</div>
+**User Statistics**
+- `/statistics/`: View to display user-specific statistics.
 
-Example of using:
+**Admin Panel**
+- `/admin/`: Admin panel is accessible at /admin/, providing a centralized interface for managing the application.
 
-    http://127.0.0.1:8000/notes/?id=5
-
-
-<div align="center">
-  <img src="images/img_3.png" alt="Start page">
-</div>
-
-Example of using:
-
-    http://127.0.0.1:8000/delete-notes/5/
-
-
-<div align="center">
-  <img src="images/img_4.png" alt="Start page">
-</div>
 
 This example assumes that your Django development server is running locally on http://127.0.0.1:8000/. 
 Make sure to adjust the URLs accordingly if your setup is different.
