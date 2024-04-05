@@ -1,42 +1,17 @@
 import json
-
-from django.contrib.auth.models import User
-from django.http import  JsonResponse, Http404, HttpResponseBadRequest
-from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.http import Http404, HttpResponseBadRequest
 from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import get_object_or_404
-
-from .forms import UserRegisterForm, NoteForm, ShareAccessForm
+from .forms import NoteForm, ShareAccessForm
 from django.contrib.auth.decorators import login_required
 from .models import Note, SharedAccess
-
-
 from django.shortcuts import render, redirect
-from django.contrib import messages
-from .forms import UserRegisterForm
-
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import logout
-# views.py
-
-from django.http import JsonResponse
-from django.contrib.auth.models import User
 from django.contrib import messages
-
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+
 
 def login_user(request):
     if request.method == 'POST':
@@ -48,6 +23,8 @@ def login_user(request):
             login(request, user)
             return JsonResponse({'status': 'success'})
     return render(request, 'login.html')
+
+
 def register(request):
     if request.method == 'POST':
         # Get form data from request
@@ -67,27 +44,33 @@ def register(request):
             return JsonResponse({'success': False, 'message': 'Username is already taken'}, status=400)
 
         # Create user manually
-        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password1)
+        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name,
+                                        password=password1)
         user.save()
 
         return JsonResponse({'success': True})
     else:
         return render(request, 'register.html')
 
+
 @login_required
 def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
+
 
 @login_required
 def notes(request):
     if request.method == 'POST':
         user = request.user
         notes = Note.objects.filter(user=user)
-        notes_list = [{'id': note.id, 'title': note.title, 'content': note.content, "date":note.created_at} for note in notes]
+        notes_list = [{'id': note.id, 'title': note.title, 'content': note.content, "date": note.created_at} for note in
+                      notes]
         return JsonResponse(notes_list, safe=False)
     else:
         return render(request, 'notes.html')
+
+
 @login_required
 def create_note(request):
     if request.method == 'POST':
@@ -134,7 +117,7 @@ def edit_note(request, id):
         if form.is_valid():
             content = note.content
             if len(content) >= 404:
-                return HttpResponseBadRequest("Content is too long. Maximum length is 404 characters.")
+                return HttpResponseBadRequest("Content is too long. Max length is 404 characters.")
             form.save()
             messages.success(request, 'Note Updated Successfully')
             return redirect('/notes/')
@@ -168,7 +151,7 @@ def view_note(request, id):
 def share_note_access(request, note_id):
     user = request.user
     note = get_object_or_404(Note, pk=note_id, user=user)
-    max_shared_accesses = 5
+    max_shared_accesses = 4
     if note.sharedaccess_set.count() >= max_shared_accesses:
         return JsonResponse({'error': 'Maximum number of shared accesses reached'}, status=400)
 
