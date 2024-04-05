@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/create.css">
+    <title>Create Note</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'create.css'%}">
+
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="http://127.0.0.1:8000/"><img src="../static/images/logo.png" alt=""></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="http://127.0.0.1:8000/">Home</a></li>
+            <li><a href="http://127.0.0.1:8000/logout/">Log Out</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <h2>Create Note</h2>
+    <form id="create-note-form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Create</button>
+    </form>
+</div>
+
+
+<script src="{%static 'create.js'%}"></script>
+</body>
+
+</html>

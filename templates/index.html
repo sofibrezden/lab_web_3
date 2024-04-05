@@ -1,228 +1,126 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
-A Note Keeping
-{% endblock title %}
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'index.css'%}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <title>Note Hub</title>
+</head>
 
-{% block body %}
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media screen and (max-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-
-        .carousel-caption {
-            display: flex;
-            justify-content: center;
-            flex-direction: column-reverse;
-        }
-
-        .heading {
-            padding-top: 0 !important;
-        }
-    }
-
-    .col-lg-4 {
-        text-align: center;
-    }
-
-    .carousel-caption {
-        color: white;
-        position: static;
-        height: 400px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .carousel-indicators li {
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        background-color: white;
-    }
-
-    .heading {
-        width: 100%;
-        padding-top: 150px;
-    }
-</style>
-
-<!--First Block-->
-<div class="container my-4 px-0">
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="carousel-caption">
-                    <div class="heading" style="background-color:rgb(180, 192, 240)">
-                        <h3>Short Note Hub welcomes you</h3>
-
-                    </div>
-                    <img src="https://img.freepik.com/premium-photo/using-professional-digital-tablet-technology-write-business-work-modern-online-screen-cyberspace-communication-hand-writing-via-white-pen-lifestyle-same-laptop-computer-notebook-using_33755-9636.jpg"
-                         alt="">
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="carousel-caption">
-                    <div class="heading" style="background-color:rgb(0, 169, 137)">
-                        <h3>When everything gets Digital</h3>
-                        <p style="font-size:20px">then why not your Notes</p>
-                    </div>
-                    <img src="https://img.freepik.com/free-vector/notes-concept-illustration_114360-689.jpg"
-                         alt="">
+<body>
+<header>
+    <div class="logo">
+        <img src="../static/images/logo.png" alt="">
+    </div>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+            <li><a href="/notes/">Notes</a></li>
+            <li><a href="/logout/">Log Out</a></li>
+            {% else %}
+            <li><a href="/register/">Sign up</a></li>
+            <li><a href="/login/">Sign In</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<!-- Main -->
+<main>
+    <!-- Main part 1 -->
+    <section class="main-1">
+        <div class="container">
+            <div class="row">
+                <img src="../static/images/illustration-1.svg" alt=""/>
+                <div class="info">
+                    <h1>Capture Ideas Instantly</h1>
+                    <p>Welcome to ShortNote Hub, your centralized spot for jotting down
+                        thoughts and organizing information swiftly and efficiently,jot down notes, and
+                        consolidate your knowledge with seamless organization.</p>
+                    <a href="/register/" class="styled-button">Get Started</a>
                 </div>
             </div>
         </div>
-        <ol class="carousel-indicators">
-            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
-        </ol>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
+    </section>
 
-    <!--Second Block Starts-->
-    <div class="row my-5">
-        <div class="col-lg-4">
-            <img src="https://thumbs.dreamstime.com/b/tired-employee-unable-to-cope-deadline-worried-caucasian-hipster-beard-sitting-workplace-clutching-head-missed-78531815.jpg"
-                 alt=""
-                 class="bd-placeholder-img rounded-circle" width="140"
-                 height="140" aria-label="Placeholder: 140x140" focusable="false">
-            <h2>
-                Meet all deadlines</h2>
+    <section class="main-2">
+
+        <div class="container">
+            <div class="row">
+                <img src="../static/images/illustration-2.svg" alt=""/>
+
+                <div class="info">
+                    <h2>Stay productive, wherever you are</h2>
+                    <p>Never let location be an issue when accessing your files. Note HUB
+                        has you covered for all of your file storage needs.</p>
+                    <p>Securely share files and folders with friends, family and
+                        colleagues for live collaboration. No email attachments
+                        required!</p>
+                    <a href="/register/" class="styled-button"> See how Note Hub works</a>
+                    <div class="quote">
+                        <i class="fa fa-quote-left fa-1x"></i>
+                        <p>Note HUB has improved our team productivity by an order of
+                            magnitude. Since making the switch our team has become a
+                            well-oiled collaboration machine.</p>
+                        <div class="founder">
+                            <img src="data:image/jpeg;base64,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"
+                                 alt=""/>
+                            <div class="details">
+                                <strong>Steve Jobs</strong>
+                                <strong>Founder & CEO, Apple</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
-            <img src="https://png.pngtree.com/png-vector/20190612/ourlarge/pngtree-analyticsboardpresentationlaptopstatistics-flat-color-ic-png-image_1351465.jpg"
-                 alt="" class="bd-placeholder-img rounded-circle" width="140"
-                 height="140" aria-label="Placeholder: 140x140" focusable="false">
-            <h2>Statistics</h2>
+    </section>
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="info">
+                <h2>Get early access today</h2>
+                <p>It only takes a minute to sign up and our free starter tier is
+                    extremely generous. If you have any questions, our support team
+                    would be happy to help you.</p>
+
+            </div>
         </div>
-        <div class="col-lg-4">
-            <img src="https://static.vecteezy.com/system/resources/previews/000/656/819/original/computer-design-teamwork-vector.jpg"
-                 alt="" class="bd-placeholder-img rounded-circle" width="140"
-                 height="140" aria-label="Placeholder: 140x140" focusable="false">
-            <h3>Collaborative Notes</h3>
-        </div>
-    </div>
-
-    <!-- START THE FEATURETTES -->
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <main>
-                <section>
-                    <h2>Main Features</h2>
-                    <p>Short Note Hub offers a simple and efficient way to manage your short notes. Explore its key
-                        features
-                        below:</p>
-                    <ul>
-                        <li>
-                            <h3>Easy Access to Short Notes</h3>
-                            <p>Quickly access and review your short notes whenever you need them.</p>
-                        </li>
-                        <li>
-                            <h3>Simple Note Management</h3>
-                            <p>Effortlessly add and remove notes through an intuitive interface.</p>
-                        </li>
-                        <li>
-                            <h3>Quick View and Edit</h3>
-                            <p>Instantly view and edit existing notes for fast updates.</p>
-                        </li>
-                    </ul>
-                </section>
-            </main>
-
-        </div>
-        <div class="col-md-5 order-md-1">
-            <img src="https://images.squarespace-cdn.com/content/v1/56acc1138a65e2a286012c54/1476623769900-2KZJ2QOEW0JNCA8J27JO/unsplashlaptop7-5.jpg?format=1000w"
-                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                 height="500" aria-label="Placeholder: 500x500" focusable="false">
-        </div>
-
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Additional Highlights</h2>
-            <ul>
-                <li>
-                    <h3>Organize with Short Lists</h3>
-                    <p>Efficiently organize your notes using short lists for better categorization.</p>
-                </li>
-                <li>
-                    <h3>Minimalistic and User-Friendly Design</h3>
-                    <p>Experience a clean and understandable design that puts simplicity at the forefront.</p>
-                </li>
-                <li>
-                    <h3>Access from Any Device</h3>
-                    <p>Enjoy the flexibility of accessing Short Note Hub from any device for on-the-go
-                        productivity.</p>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-5 order-md-1">
-            <img src="https://www.copper.com/_next/image?url=https%3A%2F%2Fd2ydtwisqcxv72.cloudfront.net%2F_1200x626_crop_center-center_82_line%2F211029_How-to-take-meeting-notes-Blog.jpg&w=992&q=75"
-                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                 height="500" aria-label="Placeholder: 500x500" focusable="false">
+    </section>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <img src="../static/images/logo.png" alt=""/>
+            <div class="footer-content">
+                <div class="col">
+                    <div>
+                        <img src="../static/images/icon-phone.svg" alt=""/>
+                        <p>Phone: +1-878-157-123</p>
+                    </div>
+                    <div>
+                        <img src="../static/images/icon-email.svg" alt=""/>
+                        <p>notehub@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="#">Contact Us</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <a href="#"><i class="fa-facebook-f" aria-hidden="true"></i>Facebook</a>
+                    <a href="#"><i class="fa-twitter" aria-hidden="true"></i>Twitter</a>
+                    <a href="#"><i class="fa-instagram" aria-hidden="true"></i>Instagram</a>
+                </div>
+            </div>
         </div>
     </div>
+</main>
 
-    <hr class="featurette-divider">
+</body>
 
-    <div class="row featurette">
-        <div class="col-md-7">
-            <main>
-                <section>
-                    <h2>Who Is It For?</h2>
-                    <p>Short Note Hub is designed for individuals seeking a straightforward tool to save their short
-                        notes without unnecessary complexities.</p>
-                    <p>Whether you're a student jotting down quick reminders, a professional keeping track of ideas,
-                        or anyone who values simplicity in note-taking, Short Note Hub provides an easy and efficient
-                        solution.</p>
-                </section>
-            </main>
-        </div>
-        <div class="col-md-5 order-md-1">
-            <img src=" https://events.yorku.ca/wp-content/uploads/2023/11/pexels-fauxels-3183150_James-Robertson-scaled.jpg"
-
-                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                 height="500" aria-label="Placeholder: 500x500" focusable="false">
-        </div>
-    </div>
-
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-            <h2>Key Demographics</h2>
-            <p>Our target audience includes:</p>
-            <ul>
-                <li>Students managing class assignments and study notes.</li>
-                <li>Professionals organizing thoughts, ideas, and to-do lists.</li>
-                <li>Individuals who appreciate a minimalistic approach to productivity.</li>
-                <li>Anyone in need of a hassle-free tool for short-term notekeeping.</li>
-            </ul>
-        </div>
-        <div class="col-md-5 order-md-1">
-            <img src="https://img.freepik.com/premium-photo/business-concept-smart-checklist-virtual-screen-modern-office-man-uses-pen-make-notes-about-exploring-topics-digital-form-check-document-sheet-laptop-work_27634-1584.jpg?w=360"
-                 alt="" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                 height="200" aria-label="Placeholder: 500x500" focusable="false">
-        </div>
-    </div>
-
-</div>
-</div>
-{% endblock body %}
+</html>

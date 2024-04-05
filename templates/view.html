@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Details</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'view.css'%}">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="">
+
+    </div>
+    <nav>
+        <ul>
+            <li><a href="http://127.0.0.1:8000/">Home</a></li>
+            <li><a href="/logout/">Log Out</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-three-quarters">
+            <div class="note-details">
+                <h2 class="title is-3">Note Details</h2>
+                <div class="content">
+                    <p><strong>Title:</strong> {{ note.title }}</p>
+                    <p><strong>Content:</strong> {{ note.content }}</p>
+                    <p><strong>Category:</strong> {{ note.category }}</p>
+                    <p><strong>Time created:</strong> {{ note.created_at|date:"M. d, Y, H:i A" }}</p>
+                    <p><strong>Time updated:</strong> {{ note.updated_at|date:"M. d, Y, H:i A" }}</p>
+                </div>
+
+                <button class="edit-button" onclick="window.location.href = '/notes/'">Go back</button>
+                <button class="delete-button">Delete</button>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

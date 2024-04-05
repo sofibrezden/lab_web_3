@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'logout.css'%}">
+</head>
+
+<body>
+<header>
+    <div class="logo">
+        <a href="http://127.0.0.1:8000/"><img src="../static/images/logo.png" alt=""></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="http://127.0.0.1:8000/">Home</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="whole">
+    <div class="container">
+        <div class="title">Logged Out</div>
+        <div class="message">
+            <p>You have been successfully logged out of your account.</p>
+            <p>
+                <a a href="#" id="loginAgain">Log in again</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="{%static 'logout.js'%}"></script>
+
+</body>
+
+</html>
