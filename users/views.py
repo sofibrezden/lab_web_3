@@ -22,6 +22,8 @@ def login_user(request):
         if user is not None:
             login(request, user)
             return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({{'success': False, 'message': 'Invalid credentials'}})
     return render(request, 'login.html')
 
 
