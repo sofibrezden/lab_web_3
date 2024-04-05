@@ -1,8 +1,11 @@
+import json
+
 from django.contrib.auth.models import User
 from django.http import  JsonResponse, Http404, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import get_object_or_404
 
 from .forms import UserRegisterForm, NoteForm, ShareAccessForm
@@ -10,29 +13,81 @@ from django.contrib.auth.decorators import login_required
 from .models import Note, SharedAccess
 
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import UserRegisterForm
+
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import logout
+# views.py
+
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.contrib import messages
+
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+
+def login_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username', '')
+        password = data.get('password', '')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'success'})
+    return render(request, 'login.html')
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Your Account has been created, You can Login Now!')
-            return redirect('/login/')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+        # Get form data from request
+        data = json.loads(request.body)
+        username = data.get('username')
+        email = data.get('email')
+        first_name = data.get('firstName')
+        last_name = data.get('lastName')
+        password1 = data.get('password')
+        password2 = data.get('confirmPassword')
 
+        # Perform manual form validation
+        if password1 != password2:
+            return JsonResponse({'success': False, 'message': 'Passwords do not match'}, status=400)
+
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'success': False, 'message': 'Username is already taken'}, status=400)
+
+        # Create user manually
+        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password1)
+        user.save()
+
+        return JsonResponse({'success': True})
+    else:
+        return render(request, 'register.html')
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return render(request, 'logout.html')
 
 @login_required
 def notes(request):
-    user = request.user
-    documents = Note.objects.filter(user=user)
-    context = {
-        'documents': documents,
-    }
-    return render(request, 'users/notes.html', context)
-
-
+    if request.method == 'POST':
+        user = request.user
+        notes = Note.objects.filter(user=user)
+        notes_list = [{'id': note.id, 'title': note.title, 'content': note.content, "date":note.created_at} for note in notes]
+        return JsonResponse(notes_list, safe=False)
+    else:
+        return render(request, 'notes.html')
 @login_required
 def create_note(request):
     if request.method == 'POST':
@@ -51,7 +106,7 @@ def create_note(request):
     context = {
         'form': form,
     }
-    return render(request, 'users/create_note.html', context)
+    return render(request, 'create_note.html', context)
 
 
 @login_required
@@ -89,7 +144,7 @@ def edit_note(request, id):
     context = {
         'form': form,
     }
-    return render(request, 'users/edit_note.html', context)
+    return render(request, 'edit_note.html', context)
 
 
 @login_required
@@ -106,7 +161,7 @@ def view_note(request, id):
     context = {
         'note': note,
     }
-    return render(request, 'users/view_note.html', context)
+    return render(request, 'view.html', context)
 
 
 @login_required
@@ -147,7 +202,7 @@ def share_note_access(request, note_id):
         'form': form,
         'note': note,
     }
-    return render(request, 'users/share_note.html', context)
+    return render(request, 'share_note.html', context)
 
 
 @login_required
@@ -158,7 +213,7 @@ def shared_notes(request):
     context = {
         'shared_notes': shared_notes,
     }
-    return render(request, 'users/shared_notes.html', context)
+    return render(request, 'shared_notes.html', context)
 
 
 @login_required
@@ -173,4 +228,4 @@ def view_statistics(request):
         'user_notes': user_notes,
         'user_shared_accesses': user_shared_accesses,
     }
-    return render(request, 'users/statistics.html', context)
+    return render(request, 'statistics.html', context)
