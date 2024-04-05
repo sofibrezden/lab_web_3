@@ -21,7 +21,8 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from users.views import create_note, edit_note, view_note, delete_note, share_note_access, shared_notes, view_statistics
+from users.views import create_note, edit_note, view_note, delete_note, share_note_access, shared_notes, \
+    view_statistics, logout_view, login_user
 
 admin.site.site_header = "Admin"
 admin.site.site_title = "Admin Portal"
@@ -29,8 +30,8 @@ admin.site.index_title = "Admin's Site"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('notes/', user_views.notes, name='notes'),
     path('create_note/', create_note, name='create_note'),
     path('edit_note/<int:id>/', edit_note, name='edit_note'),
