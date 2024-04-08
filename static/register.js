@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken // Include the CSRF token in the request headers
+                    'X-CSRFToken': csrfToken, // Include the CSRF token in the request headers
                 },
-                body: jsonData
+                body: jsonData,
             });
 
             if (!response.ok) {

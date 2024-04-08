@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/login/', {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             });
 
             if (response.ok) {
