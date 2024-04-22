@@ -1,6 +1,9 @@
 import json
+
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import Http404, HttpResponseBadRequest
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_protect
 from rest_framework.generics import get_object_or_404
 from .forms import NoteForm, ShareAccessForm
 from django.contrib.auth.decorators import login_required
@@ -11,6 +14,10 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.core.serializers import serialize
+
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 
 
 def login_user(request):
@@ -19,40 +26,39 @@ def login_user(request):
         username = data.get('username', '')
         password = data.get('password', '')
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
-            return JsonResponse({'status': 'success'})
+            return JsonResponse({'status': 'success', "user_id": user.id})
         else:
-            return JsonResponse({{'success': False, 'message': 'Invalid credentials'}})
-    return render(request, 'login.html')
+            return JsonResponse({'success': False, 'message': 'Invalid credentials'}, status=400)
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
 
 
 def register(request):
-    if request.method == 'POST':
-        # Get form data from request
-        data = json.loads(request.body)
-        username = data.get('username')
-        email = data.get('email')
-        first_name = data.get('firstName')
-        last_name = data.get('lastName')
-        password1 = data.get('password')
-        password2 = data.get('confirmPassword')
+    data = json.loads(request.body)
+    username = data.get('username')
+    email = data.get('email')
+    first_name = data.get('firstName')
+    last_name = data.get('lastName')
+    password1 = data.get('password')
+    password2 = data.get('confirmPassword')
 
-        # Perform manual form validation
-        if password1 != password2:
-            return JsonResponse({'success': False, 'message': 'Passwords do not match'}, status=400)
+    # Perform manual form validation
+    if password1 != password2:
+        return JsonResponse({'success': False, 'message': 'Passwords do not match'}, status=400)
 
-        if User.objects.filter(username=username).exists():
-            return JsonResponse({'success': False, 'message': 'Username is already taken'}, status=400)
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'success': False, 'message': 'Username is already taken'}, status=400)
 
-        # Create user manually
-        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name,
-                                        password=password1)
-        user.save()
+    # Create user manually
+    user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name,
+                                    password=password1)
+    user.save()
 
-        return JsonResponse({'success': True})
-    else:
-        return render(request, 'register.html')
+    return JsonResponse({'success': True})
 
 
 @login_required
@@ -61,16 +67,11 @@ def logout_view(request):
     return render(request, 'logout.html')
 
 
-@login_required
-def notes(request):
-    if request.method == 'POST':
-        user = request.user
-        notes = Note.objects.filter(user=user)
-        notes_list = [{'id': note.id, 'title': note.title, 'content': note.content, "date": note.created_at} for note in
-                      notes]
-        return JsonResponse(notes_list, safe=False)
-    else:
-        return render(request, 'notes.html')
+
+def notes(request,id):
+    notes = Note.objects.filter(user__id=id)
+    serialized_notes = serialize('json', notes)
+    return JsonResponse({'status': 'success', 'data': serialized_notes})
 
 
 @login_required
