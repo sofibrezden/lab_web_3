@@ -1,0 +1,168 @@
+
+/*body {*/
+/*    background: hsl(240, 75%, 98%);*/
+/*    overflow: hidden;*/
+/*}*/
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css');
+
+.wholepart {
+    max-width: 440px;
+    padding: 0 20px;
+    margin: 100px auto;
+    justify-content: center;
+    margin: 100px auto;
+}
+
+.containers {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.containers .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.containers .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.containers form {
+    padding: 30px 20px 25px 20px;
+    margin-bottom: 0;
+    /* Remove margin */
+}
+
+.containers form .row {
+    height: 45px;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.containers form .row input {
+    height: 100%;
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 15px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid lightgray;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.containers form .row button {
+    height: 100%;
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 15px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid lightgray;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+form .row input:focus {
+    border-color: #60a3f1;
+    box-shadow: inset 0 0 2px 2px rgba(26, 188, 156, 0.25);
+}
+
+.containers form .row i {
+    position: absolute;
+    width: 47px;
+    height: 100%;
+    color: #fff;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border-radius: 5px 0 0 5px;
+}
+
+.containers form .bottom button {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0;
+    border: 1px solid #8da8dd;
+    cursor: pointer;
+    animation: 0.9s ease infinite alternate running shimmer;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    background-size: 200% 100%;
+    display: inline-block;
+    box-shadow: -2px -2px 10px rgba(86, 71, 255, 0.5), 2px 2px 10px rgba(0, 8, 255, 0.5);
+    color: #ffffff;
+    cursor: pointer;
+    line-height: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.containers form .bottom button svg {
+    left: -20px;
+    opacity: 0.5;
+    position: absolute;
+    top: -2px;
+    transition: 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+}
+
+.containers form .bottom button:hover {
+    background: linear-gradient(135deg, #75abcf, #b700ff);
+    transform: rotate(-2deg);
+}
+
+.containers form .bottom button:hover svg {
+    opacity: 0.8;
+    transform: translateX(50px) scale(1.5);
+}
+
+.containers form .bottom button:active {
+    transform: scale(0.95) rotate(-3deg);
+}
+
+@keyframes shimmer {
+    to {
+        background-size: 100% 100%;
+        box-shadow: -2px -2px 6px rgba(183, 65, 238, 0.5), 2px 2px 6px rgba(144, 148, 255, 0.5);
+    }
+}
+
+.linksign {
+    text-align: center;
+    font-size: 15px;
+}
+
+.linksign a {
+    text-decoration: none;
+    color: #60a3f1;
+}
+
+.linksign a:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+    header nav ul {
+        font-size: 0.6rem;
+    }
+
+    header nav ul li {
+        margin: 0.5rem;
+    }
+}
+

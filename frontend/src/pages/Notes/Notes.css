@@ -1,0 +1,227 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+body {
+    background-color: hsl(240, 75%, 98%);
+}
+
+.no-notes {
+    font-size: 18px;
+    color: #ff0000;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+.note h3 {
+    font-size: 26px; /* Збільшуємо розмір заголовку */
+    font-weight: bold; /* Робимо заголовок жирним */
+
+}
+
+.note p {
+    display: block;
+    color: #575757;
+    font-size: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+
+.no-notes-message {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.wrapper {
+    margin: 50px auto;
+    max-width: 800px;
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(3, minmax(265px, 1fr));
+    justify-content: center;
+}
+
+.note {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 250px;
+    border-radius: 10px;
+    padding: 15px 20px 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.note:before {
+    content: "";
+    background: linear-gradient(45deg, rgb(197, 194, 249), rgb(202, 151, 241), rgb(119, 113, 238));
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(25px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    border-radius: 10px;
+}
+
+.note:hover:before {
+    opacity: 1;
+}
+
+.note-icon {
+    transform: translateY(-50%);
+    filter: hue-rotate(60deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.plus-icon {
+    position: absolute;
+    top: 90px;
+    right: 300px;
+    z-index: 2;
+    transform: translateY(-50%);
+    filter: hue-rotate(60deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.plus-icon img {
+    width: 35px;
+    height: 35px;
+}
+
+.plus-icon:hover {
+    transform: scale(1);
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    20% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.note:hover {
+    transform: scale(1.05);
+}
+
+.note-icon {
+    transform: translateY(-50%);
+    filter: hue-rotate(60deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.note-icon:hover {
+    transform: scale(0.4);
+    transform: rotate(180deg);
+}
+
+.note .details {
+    max-height: 165px;
+    overflow-y: auto;
+}
+
+.note p {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.note span {
+    display: block;
+    color: #575757;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.bottom-content span {
+    color: #6D6D6D;
+    font-size: 14px;
+}
+
+/* Медіа-запит для смартфонів */
+@media only screen and (max-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 50px auto;
+        max-width: 800px;
+        display: grid;
+        padding: 0 20px;
+        justify-content: center;
+    }
+
+    .note {
+        height: auto;
+    }
+
+    .plus-icon {
+        right: 30px;
+    }
+
+    .plus-icon img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    header nav ul {
+        font-size: 0.6rem;
+    }
+
+    header nav ul li {
+        margin: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    header nav ul {
+        font-size: 0.6rem;
+    }
+
+    header nav ul li {
+        margin: 0.5rem;
+    }
+}
+
+main-notes {
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+    main-notes {
+        max-width: 95%;
+        padding: 10px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .no-notes {
+        font-size: 20px;
+        padding: 15px;
+        margin: 20px 0;
+    }
+}

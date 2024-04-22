@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -27,26 +26,28 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
     'django.contrib.admin',
     'crispy_forms',
+    'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+# Application definition
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = [
+
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -72,21 +73,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'noteservice.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shortnoteshub',
-        'USER': '****',
-        'PASSWORD': '***********',
-        'HOST': '*********',  # Set to the host where your MySQL server is running
-        'PORT': '****',       # Set to the port your MySQL server is using
+        'USER': 'root',
+        'PASSWORD': 'brezden1905',
+        'HOST': 'localhost',  # Set to the host where your MySQL server is running
+        'PORT': '3306',  # Set to the port your MySQL server is using
     }
 }
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # your React frontend URL
+]
+
+CORS_ORIGINS_WHITELIST = ['http://localhost:3000']
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -106,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -119,7 +122,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
